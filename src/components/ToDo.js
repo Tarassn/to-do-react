@@ -8,7 +8,7 @@ import {tasks} from "../data-object";
 
 class ToDo extends Component {
     state = {
-        taskList:{
+        taskObj:{
 
         },
     };
@@ -16,36 +16,36 @@ class ToDo extends Component {
         this.loadBasicTasks()
     }
     loadBasicTasks = () =>{
-        this.setState({taskList:tasks})
+        this.setState({taskObj:tasks})
     };
     addTask = (id,name) => {
-        const taskList = {...this.state.taskList};
-        taskList[id] =
+        const taskObj = {...this.state.taskObj};
+        taskObj[id] =
             {name: name,
             created: new Date(),
             id: id,
             done: false,
             showTask: true};
 
-        this.setState({ taskList });
+        this.setState({ taskObj });
     };
     removeTask = (id) => {
-        const taskList = {...this.state.taskList};
-        taskList[id] = {};
-        this.setState({ taskList });
+        const taskObj = {...this.state.taskObj};
+        taskObj[id] = {};
+        this.setState({ taskObj });
 
     };
     doneStatusToggle = (id) => {
-        const taskList = {...this.state.taskList};
-        taskList[id].done = !taskList[id].done;
+        const taskObj = {...this.state.taskObj};
+        taskObj[id].done = !taskObj[id].done;
         this.setState({
-            taskList
+            taskObj
         })
     };
     filterTask = (e) => {
-        let taskList = toArray({...this.state.taskList}, 'name');
+        let taskObj = toArray({...this.state.taskObj}, 'name');
         if (e.target.innerHTML ==='Done'){
-            taskList.map((key) => {
+            taskObj.map((key) => {
                 if (key.done===true) {
                    return key.showTask = true
                 }
@@ -53,7 +53,7 @@ class ToDo extends Component {
             })
         }
         else if (e.target.innerHTML ==='Active'){
-            taskList.map((key) => {
+            taskObj.map((key) => {
                 if (key.done===false) {
                    return key.showTask = true
                 }
@@ -62,16 +62,16 @@ class ToDo extends Component {
             })
         }
         else{
-            taskList.map((key) => {
+            taskObj.map((key) => {
                 console.log(key);
                 if(key.hasOwnProperty('id')){
                     key.showTask = true;
                 }
             })
         }
-        taskList = toDict(taskList,'id');
+        taskObj = toDict(taskObj,'id');
         this.setState({
-            taskList
+            taskObj
         })
     };
     render() {
@@ -82,7 +82,7 @@ class ToDo extends Component {
                 />
                 <Tasks
                     doneStatusToggle = {this.doneStatusToggle}
-                    taskList ={this.state.taskList}
+                    taskObj ={this.state.taskObj}
                     removeTask = {this.removeTask}
                 />
                 <FilterTask

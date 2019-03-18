@@ -8,16 +8,16 @@ class Tasks extends Component {
 
         return (
             <div>
-                {Object.keys(this.props.taskList).map((key) => (
+                {Object.keys(this.props.taskObj).map((key) => (
                 <Task
                     key = {key}
                     id = {key}
-                    name = {this.props.taskList[key].name}
-                    taskList = {this.props.taskList}
-                    showTask = {this.props.taskList[key].showTask}
+                    name = {this.props.taskObj[key].name}
+                    taskObj = {this.props.taskObj}
+                    showTask = {this.props.taskObj[key].showTask}
                     removeTask = {this.props.removeTask}
                     doneStatusToggle = {this.props.doneStatusToggle}
-                    done={this.props.taskList[key].done}
+                    done={this.props.taskObj[key].done}
                 />
 
             ))}
