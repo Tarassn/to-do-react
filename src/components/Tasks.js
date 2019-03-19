@@ -5,19 +5,19 @@ import Task from "./Task";
 class Tasks extends Component {
 
     render() {
-
+        let taskObj = this.props.taskObj;
         return (
             <div>
-                {Object.keys(this.props.taskObj).map((key) => (
+                {Object.keys(taskObj).map((key) => (
                 <Task
                     key = {key}
                     id = {key}
-                    name = {this.props.taskObj[key].name}
-                    taskObj = {this.props.taskObj}
-                    showTask = {this.props.taskObj[key].showTask}
+                    name = {taskObj[key].name}
+                    taskObj = {taskObj}
+                    showTask = {taskObj[key].showTask}
                     removeTask = {this.props.removeTask}
                     doneStatusToggle = {this.props.doneStatusToggle}
-                    done={this.props.taskObj[key].done}
+                    done={taskObj[key].done}
                 />
 
             ))}

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-let nanoid = require('nanoid');//random id
 
 
 class AddTask extends Component {
@@ -15,17 +14,13 @@ class AddTask extends Component {
             inputLength
         })
     };
-    handleClick = () => {
-            let randomId = nanoid(4);
-            this.props.addTask(randomId, this.state.currentName)
-    };
 
     render() {
 
         return (
             <div className={'add-task'}>
                 <input onChange={this.changeName} type="text"/>
-                <button onClick={this.handleClick}
+                <button onClick={()=>{this.props.addTask(this.state.currentName)}}
                         className="btn btn-outline-success"
                         disabled={this.state.inputLength<1}
                 >Add</button>

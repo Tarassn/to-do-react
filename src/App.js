@@ -5,6 +5,7 @@ import FilterTask from "./components/FilterTask";
 import {toArray, toDict} from "./utils";
 import {tasks} from "./data-object";
 import AddTask from "./components/AddTask";
+let nanoid = require('nanoid');
 
 
 class App extends Component {
@@ -19,8 +20,9 @@ class App extends Component {
     loadBasicTasks = () =>{
         this.setState({taskObj:tasks})
     };
-    addTask = (id,name) => {
+    addTask = (name) => {
         const taskObj = {...this.state.taskObj};
+        const id = nanoid();
         taskObj[id] =
             {name: name,
                 created: new Date(),
@@ -45,7 +47,7 @@ class App extends Component {
     };
     filterTask = (e) => {
         let taskObj = toArray({...this.state.taskObj}, 'name');
-        if (e.target.innerHTML ==='Done'){
+        if (e.target.name ==='Done'){
             taskObj.map((key) => {
                 if (key.done===true) {
                     return key.showTask = true
@@ -53,7 +55,7 @@ class App extends Component {
                 return key.showTask = false
             })
         }
-        else if (e.target.innerHTML ==='Active'){
+        else if (e.target.name ==='Active'){
             taskObj.map((key) => {
                 if (key.done===false) {
                     return key.showTask = true
